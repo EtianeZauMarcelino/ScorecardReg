@@ -329,7 +329,7 @@ with tab1:
 
 
     with col3:
-        st.header("Top 10 by Email protocol 📧 ...")
+        st.markdown("##### Top 10 by Email protocol 📧 ...")
         # Display the top 10 ranked domains
         st.dataframe(ranked_data[['domain', 'security_score_mail']].head(10).sort_values(by='security_score_mail', ascending=False)
                      , hide_index=True
