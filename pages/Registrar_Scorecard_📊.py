@@ -291,7 +291,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.header("Top 10 Registrar ...")
+        st.markdown("###### Top 10 Registrar ...")
         # Display the top 10 ranked domains
         st.dataframe(ranked_data[['domain', 'security_score']].head(10), hide_index=True,
 
@@ -310,7 +310,7 @@ with tab1:
 
 
     with col2:
-        st.header("Top 10 by Web protocol 🌐 ...")
+        st.markdown("###### Top 10 by Web protocol 🌐 ...")
         # Display the top 10 ranked domains
         st.dataframe(ranked_data[['domain', 'security_score_web']].head(10).sort_values(by='security_score_web', ascending=False)
                      , hide_index=True
@@ -329,7 +329,7 @@ with tab1:
 
 
     with col3:
-        st.markdown("##### Top 10 by Email protocol 📧 ...")
+        st.markdown("###### Top 10 by Email protocol 📧 ...")
         # Display the top 10 ranked domains
         st.dataframe(ranked_data[['domain', 'security_score_mail']].head(10).sort_values(by='security_score_mail', ascending=False)
                      , hide_index=True
