@@ -14,6 +14,8 @@ st.logo(
     'LOGO-BRANCO-RGB.png'
 )
 
+alt.themes.enable("dark")
+
 st.markdown("# PTSOC Scorecard Dashboard")
 # st.sidebar.markdown("# Scorecard ")
 
