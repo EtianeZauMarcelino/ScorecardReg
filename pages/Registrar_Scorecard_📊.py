@@ -120,7 +120,7 @@ with col1:
 with col2:
     # st.header("Dane", anchor=False)
     st.markdown("#### Dane")
-    st.altair_chart(make_donut_2(tlsa, 'Protocolo TLSA', 'green'), use_container_width=True)
+    st.altair_chart(make_donut_2(tlsa, 'Protocolo TLSA', 'red'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col3:
@@ -138,7 +138,7 @@ with col4:
 with col5:
     # st.header("HSTS", anchor=False)
     st.markdown("#### HSTS")
-    st.altair_chart(make_donut_2(hsts, 'HSTS', 'green'), use_container_width=True)
+    st.altair_chart(make_donut_2(hsts, 'HSTS', 'red'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col6:
