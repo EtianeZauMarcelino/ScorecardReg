@@ -18,7 +18,7 @@ st.markdown("# PTSOC Scorecard Dashboard")
 # st.sidebar.markdown("# Scorecard ")
 
 
-st.text('Sobre registrar website...')
+st.text('Sobre registrar websites descrição ...')
 
 from datetime import datetime
 st.code(f'Update time : {datetime.today().strftime("%d-%m-%Y %H:%M:%S")}')
