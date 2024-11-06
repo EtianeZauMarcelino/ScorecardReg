@@ -1,6 +1,7 @@
 import streamlit as st
 import altair as alt
 import pandas as pd
+from datetime import datetime
 
 st.set_page_config(
     page_title="PTSOC",
@@ -16,14 +17,25 @@ st.logo(
 
 alt.themes.enable("dark")
 
+import duckdb
+
+# create a connection to a file called 'file.db'
+con = duckdb.connect("pages/dns_crowler_database.db", read_only=False)
+
+hoje = con.sql("""
+        SELECT 
+        max(timestamp) as timestamp
+        FROM dns_crowler_database.main.dns_dados_tratados;
+        """).fetchone()
+
 st.markdown("# PTSOC Scorecard Dashboard")
 # st.sidebar.markdown("# Scorecard ")
 
 
 st.text('Sobre registrar websites descrição ...')
 
-from datetime import datetime
-st.code(f'Update time : {datetime.today().strftime("%d-%m-%Y %H:%M:%S")}')
+
+st.code(f'Update time : {hoje[0]}')
 
 # Donut chart
 def make_donut_2(input_response, input_text, input_color):
@@ -70,10 +82,6 @@ def make_donut_2(input_response, input_text, input_color):
 
 
 
-import duckdb
-
-# create a connection to a file called 'file.db'
-con = duckdb.connect("pages/dns_crowler_database.db", read_only=False)
 
 df = con.sql("""
         SELECT 
