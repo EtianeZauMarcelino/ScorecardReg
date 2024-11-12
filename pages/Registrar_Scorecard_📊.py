@@ -37,6 +37,8 @@ st.text('Sobre registrar websites descrição ...')
 
 st.code(f'Update time : {hoje[0]}')
 
+
+
 # Donut chart
 def make_donut_2(input_response, input_text, input_color):
   if input_color == 'blue':
@@ -50,15 +52,15 @@ def make_donut_2(input_response, input_text, input_color):
     
   source = pd.DataFrame({
       "Topic": ['', input_text],
-      "value": [109-input_response, input_response]
+      "% value": [109-input_response, input_response]
   })
   source_bg = pd.DataFrame({
       "Topic": ['', input_text],
-      "value": [109, 0]
+      "% value": [109, 0]
   })
     
   plot = alt.Chart(source).mark_arc(innerRadius=45, cornerRadius=25).encode(
-      theta="value",
+      theta="% value",
       color= alt.Color("Topic:N",
                       scale=alt.Scale(
                           #domain=['A', 'B'],
@@ -68,9 +70,9 @@ def make_donut_2(input_response, input_text, input_color):
                       legend=None),
   ).properties(width=130, height=130)
     
-  text = plot.mark_text(align='center', color="#29b5e8", font="Lato", fontSize=32, fontWeight=700, fontStyle="italic").encode(text=alt.value(f'{input_response}'))
+  text = plot.mark_text(align='center', color="#29b5e8", font="Lato", fontSize=32, fontWeight=700, fontStyle="italic").encode(text=alt.value(f'{input_response}%'))
   plot_bg = alt.Chart(source_bg).mark_arc(innerRadius=45, cornerRadius=20).encode(
-      theta="value",
+      theta="% value",
       color= alt.Color("Topic:N",
                       scale=alt.Scale(
                           # domain=['A', 'B'],
@@ -109,41 +111,79 @@ hsts = len(df[df['HSTS'] == 'Y'])
 
 st.markdown("## WEB 🌐")
 
+@st.dialog("Registrar sem DNSSEC")
+def show_list(col_name):
+    st.write(f"Os Registrar sem {col_name} by default...")
+    on = st.toggle("Registrar list...")
+    if not on:
+        data = df[df[col_name] == 'Y']
+        st.dataframe(data[['domain', 'timestamp']])
+    else:
+        data = df[df[col_name] != 'Y']
+        st.dataframe(data[['domain', 'timestamp']])
+
+
+st.markdown("""
+    <style>
+    /* Remove border do botão padrão do Streamlit */
+    .stButton > button {
+        border: none;
+ 
+        cursor: pointer;
+    }
+    
+    </style>
+    """, unsafe_allow_html=True)
+
 col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 with col1:
     #st.header("DNSSEC", anchor=False)
-    st.markdown("#### DNSSEC")
+    #st.markdown("#### DNSSEC")
+    if st.button("### __DNSSEC__", use_container_width = True):
+        show_list('HAS_DNSSEC')
     st.altair_chart(make_donut_2(dnssec, 'DNSSEC', 'green'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
+    
+    
 
 with col2:
     # st.header("Dane", anchor=False)
-    st.markdown("#### Dane")
+    # st.markdown("#### Dane")
+    if st.button("## __Dane__", use_container_width = True):
+        show_list('HAS_WEB_DANE')
     st.altair_chart(make_donut_2(tlsa, 'Protocolo TLSA', 'red'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col3:
     # st.header("Is Redirect", anchor=False)
-    st.markdown("#### Is Redirect")
+    #st.markdown("#### Is Redirect")
+    if st.button("## __Is Redirect__", use_container_width = True):
+        show_list('is_redirect')
     st.altair_chart(make_donut_2(is_redirect, 'Is Redirect', 'green'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col4:
     # st.header("Certificate", anchor=False)
-    st.markdown("#### Certificate")
+    # st.markdown("#### Certificate")
+    if st.button("## __Certificate__", use_container_width = True):
+        show_list('certificate')
     st.altair_chart(make_donut_2(cert, 'Certificate', 'green'), use_container_width=True)
    # st.container().container(border=True).caption('Note...')
 
 with col5:
     # st.header("HSTS", anchor=False)
-    st.markdown("#### HSTS")
+    # st.markdown("#### HSTS")
+    if st.button("## __HSTS__", use_container_width = True):
+        show_list('HSTS')
     st.altair_chart(make_donut_2(hsts, 'HSTS', 'red'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col6:
     # st.header("DNS Abuse", anchor=False)
-    st.markdown("#### DNS Abuse")
+    # st.markdown("#### DNS Abuse")
+    st.button("## __DNS Abuse__", use_container_width = True, on_click= None)
+        
     st.altair_chart(make_donut_2(5, 'Abuse', 'green'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
