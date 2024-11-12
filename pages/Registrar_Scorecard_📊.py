@@ -212,31 +212,43 @@ st.divider()
 
 st.markdown("## EMAIL 📧")
 
-col1, col2, col3, col4 = st.columns(4)
+col0, col1, col2, col3 = st.columns(4)
+
+
+with col0:
+    # st.header("DNSSEC", anchor=False)
+    # st.markdown("#### DNSSEC")
+    if st.button("## __DNSSEC__", use_container_width = True):
+        show_list('HAS_DNSSEC')
+    st.altair_chart(make_donut_2(dnssec, 'DNSSEC', 'orange'), use_container_width=True)
+    # st.container().container(border=True).caption('Note...')
+
 
 with col1:
     # st.header("SPF", anchor=False)
-    st.markdown("#### SPF")
+    # st.markdown("#### SPF")
+    if st.button("## __SPF__", use_container_width = True):
+        show_list('HAS_TXT_SPF')
     st.altair_chart(make_donut_2(spf, 'TXT_SPF', 'green'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col2:
     # st.header("DMARC", anchor=False)
-    st.markdown("#### DMARC")
+    # st.markdown("#### DMARC")
+    if st.button("## __DMARC__", use_container_width = True):
+        show_list('HAS_TXT_DMARC')
     st.altair_chart(make_donut_2(dmarc, 'TXT_DMARC', 'green'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 with col3:
     # st.header("DKIM", anchor=False)
-    st.markdown("#### DKIM")
+    # st.markdown("#### DKIM")
+    if st.button("## __DKIM__", use_container_width = True):
+        show_list('HAS_TXT_DKIM')
     st.altair_chart(make_donut_2(dkim, 'TXT_DKIM', 'orange'), use_container_width=True)
    # st.container().container(border=True).caption('Note...')
 
-with col4:
-    # st.header("DNSSEC", anchor=False)
-    st.markdown("#### DNSSEC")
-    st.altair_chart(make_donut_2(dnssec, 'DNSSEC', 'orange'), use_container_width=True)
-    # st.container().container(border=True).caption('Note...')
+
 
 
 st.divider()
