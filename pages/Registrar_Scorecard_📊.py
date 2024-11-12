@@ -93,23 +93,18 @@ df = con.sql("""
 
 
 dnssec = len(df[df['HAS_DNSSEC'] == 'Y'])
-# st.write(f'dnssec: {dnssec}')
 
 tlsa = len(df[df['HAS_WEB_DANE'] == 'Y'])
-# st.write(f'tlsa: {tlsa}')
 
 is_redirect = len(df[df['is_redirect'] == 'Y'])
-# st.write(f'https: {https}')
 
 cert = len(df[df['certificate'] == 'Y'])
-# st.write(f'cert: {cert}')
-
 
 hsts = len(df[df['HSTS'] == 'Y'])
-# st.write(f'hsts: {hsts}')
 
 
-st.markdown("## WEB 🌐")
+st.html("<style>[data-testid='stHeaderActionElements'] {display: none;}</style>")
+st.markdown("## WEB 🌐", unsafe_allow_html = True)
 
 @st.dialog("Registrar sem DNSSEC")
 def show_list(col_name):
