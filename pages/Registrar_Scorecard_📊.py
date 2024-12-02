@@ -215,7 +215,7 @@ with col0:
     # st.markdown("#### DNSSEC")
     if st.button("## __DNSSEC__", use_container_width = True):
         show_list('HAS_DNSSEC')
-    st.altair_chart(make_donut_2(dnssec, 'DNSSEC', 'orange'), use_container_width=True)
+    st.altair_chart(make_donut_2(dnssec, 'DNSSEC', 'green'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
 
