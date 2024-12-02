@@ -130,7 +130,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-col1, col2, col3, col4, col5, col6 = st.columns(6)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     #st.header("DNSSEC", anchor=False)
@@ -174,13 +174,13 @@ with col5:
     st.altair_chart(make_donut_2(hsts, 'HSTS', 'red'), use_container_width=True)
     # st.container().container(border=True).caption('Note...')
 
-with col6:
-    # st.header("DNS Abuse", anchor=False)
-    # st.markdown("#### DNS Abuse")
-    st.button("## __DNS Abuse__", use_container_width = True, on_click= None)
+# with col6:
+#     # st.header("DNS Abuse", anchor=False)
+#     # st.markdown("#### DNS Abuse")
+#     st.button("## __DNS Abuse__", use_container_width = True, on_click= None)
         
-    st.altair_chart(make_donut_2(5, 'Abuse', 'green'), use_container_width=True)
-    # st.container().container(border=True).caption('Note...')
+#     st.altair_chart(make_donut_2(5, 'Abuse', 'green'), use_container_width=True)
+#     # st.container().container(border=True).caption('Note...')
 
 
 
